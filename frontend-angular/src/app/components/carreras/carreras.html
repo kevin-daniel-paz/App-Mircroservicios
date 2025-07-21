@@ -1,0 +1,61 @@
+<!--Contenedor con BOOTSTRAP-->
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Registro de Carreras</h2>
+
+    <!--Formulario para agregar y editar carrera-->
+    <form (ngSubmit)="guardarCarrera()" class="card p-4 shadow-sm mb-4">
+        <div class="row g-3">
+
+            <!--Campo nombre-->
+            <div class="col-md-5">
+                <input type="text" class="form-control" [(ngModel)]="carrera.nombre" name="nombre" placeholder="Nombre de la carrera" required>
+            </div>
+
+            <!--Campo duracion-->
+            <div class="col-md-5">
+                <input type="text" class="form-control" [(ngModel)]="carrera.duracion" name="duracion" placeholder="duracion de la carrera" required>
+            </div>
+
+            <!--Botones: agregar/actualizar y cancelar-->
+            <div class="col-md-2 d-grid gap-2">
+                <button type="submit" class="btn btn-primary">
+                    {{ editando ? 'Actualizar' : 'Agregar'}}
+                </button>
+                <button type="button" class="btn btn-secondary" *ngIf="editando" (click)="resetFormulario()">
+                    cancelar
+                </button>
+
+            </div>
+        </div>
+    </form>
+
+    <!--Tbla para mostrar las carreras-->
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-light">
+            <tr>
+                <th>ID</th>
+                <th>Carreras</th>
+                <th>Años de estudios</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let u of carreras; let i = index">
+                <th>{{u.id}}</th>
+                <th>{{u.nombre}}</th>
+                <th>{{u.duracion}}</th>
+                <th class="text-center">
+                    <button class="btn btn-warning me-2" (click)="editar(u)">
+                        Editar
+                    </button>
+                    <button class="btn btn-sm btn-danger" (click)="eliminar(u.id!)">
+                        eliminar
+                    </button>
+                </th>
+
+            </tr>
+        </tbody>
+
+    </table>
+</div>
